@@ -19,10 +19,9 @@ app.post('/api/scrape', async (req, res) => {
   if (!url) {
     return res.status(400).json({ message: 'URL is required' });
   }
-
   const titleClass = ['#productTitle', '.VU-ZEz', '.a-size-large', '.product-title-word-break'];
   const imageClass = ['.imgTagWrapper img', '.a-dynamic-image', '.a-stretch-horizontal', '.DByuf4', '.IZexXJ', '.jLEJ7H'];
-  const priceClass = ['.a-price-whole', '.Nx9bqj', '.CxhGGd', '.money'];
+  const priceClass = ['.a-price-whole', '.Nx9bqj', '.CxhGGd', '.money', 'a-price', 'aok-align-center', ' reinventPricePriceToPayMargin', 'priceToPay'];
   // const about = ['a-section','a-spacing-medium ','a-spacing-top-small'];
   // const oldPrice = [];
   // const rating = [];
