@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer-core';
 
-const SBR_WS_ENDPOINT = 'wss://brd-customer-hl_b7d38241-zone-pricehawkhackathon:t4swhde3hx17@brd.superproxy.io:9222';
+const SBR_WS_ENDPOINT = 'wss://brd-customer-hl_1b3726e9-zone-scraping1:vce3shhpnfj5@brd.superproxy.io:9222';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -16,10 +16,7 @@ export default async function handler(req, res) {
   const titleClass = ['#productTitle', '.VU-ZEz', '.a-size-large', '.product-title-word-break'];
   const imageClass = ['.imgTagWrapper img', '.a-dynamic-image', '.a-stretch-horizontal', '.DByuf4', '.IZexXJ', '.jLEJ7H'];
   const priceClass = ['.a-price-whole', '.Nx9bqj', '.CxhGGd', '.money', 'a-price', 'aok-align-center', ' reinventPricePriceToPayMargin', 'priceToPay'];
-  // const about = ['a-section','a-spacing-medium ','a-spacing-top-small'];
-  // const oldPrice = [];
-  // const rating = [];
-  
+
 
   try {
     console.log('Connecting to Scraping Browser...');
