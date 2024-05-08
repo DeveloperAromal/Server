@@ -6,7 +6,7 @@ const app = express();
 const PORT = 8000;
 
 app.use(cors());
-const SBR_WS_ENDPOINT = 'wss://brd-customer-hl_b7d38241-zone-pricehawkhackathon:t4swhde3hx17@brd.superproxy.io:9222';
+const SBR_WS_ENDPOINT = 'wss://brd-customer-hl_19bcec57-zone-pricehawkky:kfqd8ct5k2fk@brd.superproxy.io:9222';
 app.use(express.json());
 
 app.post('/api/scrape', async (req, res) => {
@@ -34,7 +34,7 @@ app.post('/api/scrape', async (req, res) => {
 
     try {
       const page = await browser.newPage();
-      await page.goto(url, { timeout: 30000 });
+      await page.goto(url, { timeout: 120000 });
 
       console.log('Navigated! Scraping page content...');
 
