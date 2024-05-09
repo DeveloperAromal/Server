@@ -7,11 +7,9 @@ const app = express();
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-app.post('/send-emails', async (req, res) => {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-  const supabaseKey = process.env.SUPABASE_SERVICE_KEY || '';
-
-  // Initialize Supabase client
+app.post('/api/email/sendmail', async (req, res) => {
+  const supabaseUrl = 'https://hsqexrueqqjqcpxnaoah.supabase.co'; // Replace with your Supabase URL
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhzcWV4cnVlcXFqcWNweG5hb2FoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTMzNjU0MzYsImV4cCI6MjAyODk0MTQzNn0.QeeWvi6Av5eW6m6ps9mBh08AUcieOTutniW0YrUnqHc';
   const supabase = createClient(supabaseUrl, supabaseKey);
 
   try {
@@ -28,8 +26,8 @@ app.post('/send-emails', async (req, res) => {
     const transport = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.MY_EMAIL || '',
-        pass: process.env.MY_PASSWORD || '',
+        user: 'aromals161@gmail.com', // Hardcoded email
+        pass: 'jwnbqyqkkebkemho', 
       },
     });
 
@@ -45,7 +43,79 @@ app.post('/send-emails', async (req, res) => {
         from: process.env.MY_EMAIL || '',
         to: emailData.data?.email || '', // Send email to recipient associated with the UUID
         subject: `Message for UUID: ${uuidData.uuid}`,
-        html: `<h1>Hello, ${emailData.data?.email}!</h1><p>This is a custom HTML email template for UUID: ${uuidData.uuid}.</p><p>Feel free to customize it as needed.</p>`,
+        html: `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Email Template</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              background-color: #1e1e1e;
+              color: #ffffff;
+              padding: 20px;
+            }
+            .container {
+              max-width: 700px;
+              margin: 0 auto;
+              background-color: #292929;
+              padding: 20px;
+              border-radius: 10px;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+              color: #ffffff;
+              text-align: center;
+            }
+            p {
+              color: #cccccc;
+              line-height: 1.6;
+            }
+            .product-info {
+              margin-top: 20px;
+              text-align: center;
+            }
+            .product-title {
+              font-size: 18px;
+              font-weight: bold;
+              color: #ffffff;
+              margin-bottom: 10px;
+            }
+            .product-price {
+              font-size: 16px;
+              color: #007bff;
+            }
+            .product-image {
+              display: block;
+              margin-top: 20px;
+              width: 100%;
+              max-width: 400px;
+              height: auto;
+            }
+            .image_cont {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-bottom: 20px;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <h1>Hey mate, this is from PriceHawk team</h1>
+            <p style="text-align: center;">This is to inform you that the price of your product has been decreased.</p>
+            <div class="image_cont">
+              <img class="product-image" src="${image}" alt="Product Image">
+            </div>
+            <div class="product-info">
+              <p class="product-title">${title}</p>
+              <p class="product-price">New Price: $${price}</p>
+            </div>
+          </div>
+        </body>
+        </html>
+        `,
       };
 
       // Send email
